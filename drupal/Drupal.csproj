@@ -13,4 +13,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Drupal.Domain\Drupal.Domain.csproj" />
+    <ProjectReference Include="..\Drupal.Infrastructure.Api\Drupal.Infrastructure.Api.csproj" />
+    <ProjectReference Include="..\Drupal.Infrastructure.Database\Drupal.Infrastructure.Database.csproj" />
+  </ItemGroup>
+
 </Project>
