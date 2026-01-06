@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36705.20 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drupal", "drupal\drupal.csproj", "{2C456E88-2F3C-42F4-92CF-7852BE59E4B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drupal", "drupal\Drupal.csproj", "{2C456E88-2F3C-42F4-92CF-7852BE59E4B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drupal.Domain", "Drupal.Domain\Drupal.Domain.csproj", "{06323BAC-5DD2-403C-9873-F46720D33856}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drupal.Infrastructure.Database", "Drupal.Infrastructure.Database\Drupal.Infrastructure.Database.csproj", "{D56DCB86-D2C2-43C2-9D67-49BA97B7EDF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drupal.Infrastructure.Api", "Drupal.Infrastructure.Api\Drupal.Infrastructure.Api.csproj", "{A1009578-441B-4408-A82D-04D1B41071CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{2C456E88-2F3C-42F4-92CF-7852BE59E4B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C456E88-2F3C-42F4-92CF-7852BE59E4B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C456E88-2F3C-42F4-92CF-7852BE59E4B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06323BAC-5DD2-403C-9873-F46720D33856}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06323BAC-5DD2-403C-9873-F46720D33856}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06323BAC-5DD2-403C-9873-F46720D33856}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06323BAC-5DD2-403C-9873-F46720D33856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D56DCB86-D2C2-43C2-9D67-49BA97B7EDF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D56DCB86-D2C2-43C2-9D67-49BA97B7EDF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D56DCB86-D2C2-43C2-9D67-49BA97B7EDF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D56DCB86-D2C2-43C2-9D67-49BA97B7EDF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1009578-441B-4408-A82D-04D1B41071CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1009578-441B-4408-A82D-04D1B41071CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1009578-441B-4408-A82D-04D1B41071CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1009578-441B-4408-A82D-04D1B41071CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
