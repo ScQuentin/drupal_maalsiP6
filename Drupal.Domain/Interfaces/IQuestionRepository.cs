@@ -4,11 +4,11 @@ namespace Drupal.Domain.Interfaces;
 
 public interface IQuestionRepository
 {
-    public Question GetById(int questionId);
-    public IEnumerable<Question> GetUnansweredByUserId(Guid userId);
-    public IEnumerable<Question> GetAnsweredByUserId(Guid userId);  
-    public Question Create(Question question);
-    public Question Update(Question question);
-    public Question Delete(int questionId);
+    public Task<Question> GetById(int questionId);
+    public Task<IEnumerable<Question>> GetUnansweredByUserId(Guid userId);
+    public Task<IEnumerable<Question>> GetAnsweredByUserId(Guid userId);  
+    public Task<Question> Create(Question question);    
+    public Task<Question> Update(Question question);
+    public void Delete(int questionId);
 
 }
