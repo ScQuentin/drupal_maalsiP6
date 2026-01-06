@@ -1,0 +1,6 @@
+@drupal_HostAddress = http://localhost:5217
+
+GET {{drupal_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
