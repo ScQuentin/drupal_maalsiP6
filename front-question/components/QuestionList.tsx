@@ -86,6 +86,7 @@ export default function QuestionList() {
 
     return (
         <div className="container">
+            <div className="title">DRUPAL</div>
             <h1>Questions disponibles</h1>
             {questions.length === 0 ? (
                 <p>Aucune question en attente.</p>

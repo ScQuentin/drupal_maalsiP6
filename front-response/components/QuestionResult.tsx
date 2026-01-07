@@ -44,6 +44,7 @@ export default function QuestionResults() {
 
     return (
         <div className="container">
+            <div className="title">DRUPAL</div>
             <h1>Résultats des votes</h1>
             <div className="results-grid">
                 {results.map((r) => {
