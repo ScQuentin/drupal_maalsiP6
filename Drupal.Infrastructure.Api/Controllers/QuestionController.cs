@@ -19,18 +19,18 @@ public class QuestionController(IQuestionService questionService) : ControllerBa
     [HttpPost("Vote")]
     public async Task<IActionResult> AnswerQuestion(AnswerDto answerDto)
     {
-        var answer = questionService.AnswerQuestion(
+        await questionService.AnswerQuestion(
             answerDto.QuestionId,
             answerDto.UserId,
             answerDto.Answer
         );
-        return Ok(answer);
+        return Ok(new { message = "Answer recorded successfully" });
     }
 
     [HttpPost("Create")]
     public async Task<IActionResult> CreateQuestion(string wording)
     {
-        var question = questionService.CreateQuestion(wording);  
+        var question = await questionService.CreateQuestion(wording);  
         return Ok(question);
     }
 }
