@@ -94,6 +94,7 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<DrupalDbContext>();
     db.Database.Migrate();
     var questionRepository = scope.ServiceProvider.GetRequiredService<IQuestionRepository>();
+
     foreach (var questionText in questions)
     {
         await questionRepository.Create(questionText);

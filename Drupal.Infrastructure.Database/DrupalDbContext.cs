@@ -31,7 +31,10 @@ public class DrupalDbContext : DbContext
         {
             entity.ToTable("Questions");
             entity.HasKey(e => e.Id);
-            entity.Property(e => e.Wording).IsRequired().HasMaxLength(500);
+            entity.Property(e => e.Wording)
+            .IsRequired()
+            .HasMaxLength(500)
+            .IsUnicode(true);
         });
 
         // Configuration de la table Answers (Many-to-Many)
