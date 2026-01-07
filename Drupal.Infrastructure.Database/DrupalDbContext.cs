@@ -23,14 +23,7 @@ public class DrupalDbContext : DbContext
         {
             entity.ToTable("Users");
             entity.HasKey(e => e.Id);
-            entity.Property(e => e.Firstname).IsRequired().HasMaxLength(100);
-            entity.Property(e => e.Lastname).IsRequired().HasMaxLength(100);
-            entity.Property(e => e.Email).IsRequired().HasMaxLength(255);
-            entity.Property(e => e.GoogleId).IsRequired().HasMaxLength(255);
 
-            // Index unique sur Email et GoogleId
-            entity.HasIndex(e => e.Email).IsUnique();
-            entity.HasIndex(e => e.GoogleId).IsUnique();
         });
 
         // Configuration de la table Questions

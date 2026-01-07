@@ -1,3 +1,3 @@
 ﻿namespace Drupal.Domain.Models;
 
-public record User();
+public record User(Guid Id);

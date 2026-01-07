@@ -1,13 +1,20 @@
 ﻿using Drupal.Domain.Interfaces;
 using Drupal.Domain.Models;
+using Drupal.Infrastructure.Database.Entities;
 
 namespace Drupal.Infrastructure.Database.Repositories;
 
-public class UserRepository : IUserRepository
+public class UserRepository(DrupalDbContext context) : IUserRepository
 {
-    public User CreateUser(User user)
+    public async Task<Guid> CreateUser()
     {
-        throw new NotImplementedException();
+        var entity = new UserEntity
+        {
+            Id = Guid.NewGuid()
+        };
+        context.Add(entity);
+        await context.SaveChangesAsync();
+        return entity.Id;
     }
 
     public User GetByGoogleId(string googleId)
@@ -15,8 +22,10 @@ public class UserRepository : IUserRepository
         throw new NotImplementedException();
     }
 
-    public User GetById(Guid id)
+    public async Task<User> GetById(Guid id)
     {
-        throw new NotImplementedException();
+
+        var user = await context.Users.FindAsync(id);
+        return new User(id);
     }
 }

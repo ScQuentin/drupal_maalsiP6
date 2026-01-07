@@ -4,8 +4,8 @@ namespace Drupal.Domain.Interfaces;
 
 public interface IUserRepository
 {
-    public User CreateUser(User user);
-    public User GetById(Guid id);
-    public User GetByGoogleId(string googleId);
+    Task<Guid> CreateUser();
+    Task<User> GetById(Guid id);
+    User GetByGoogleId(string googleId);
 
 }
