@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import '../css/css.css';
 
 interface QuestionResult {
-    id: number;
-    libelle: string;
+    id: string;
+    wording: string;
     votesOui: number;
     votesNon: number;
 }
@@ -21,11 +21,10 @@ export default function QuestionResults() {
                     setResults(data);
                 } else { throw new Error('API Error'); }
             } catch (error) {
-                console.warn("Mode hors ligne: Résultats Mock chargés");
                 setResults([
-                    { id: 1, libelle: "Le TDD est-il indispensable ?", votesOui: 42, votesNon: 8 },
-                    { id: 2, libelle: "Préférez-vous le télétravail ?", votesOui: 150, votesNon: 10 },
-                    { id: 3, libelle: "L'ananas sur la pizza : Oui ou Non ?", votesOui: 30, votesNon: 70 }
+                    { id: "guid-1", wording: "Le TDD est-il indispensable ?", votesOui: 42, votesNon: 8 },
+                    { id: "guid-2", wording: "Préférez-vous le télétravail ?", votesOui: 150, votesNon: 10 },
+                    { id: "guid-3", wording: "L'ananas sur la pizza : Oui ou Non ?", votesOui: 30, votesNon: 70 }
                 ]);
             }
         };
@@ -51,7 +50,8 @@ export default function QuestionResults() {
 
                     return (
                         <div key={r.id} className="result-card">
-                            <h2>{r.libelle}</h2>
+                            {/* Affichage via la propriété wording */}
+                            <h2>{r.wording}</h2>
                             <div className="stats">
                                 <div className="stat-row">
                                     <span className="label">Oui ({r.votesOui})</span>
