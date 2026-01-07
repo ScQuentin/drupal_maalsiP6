@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: drupal_sqlserver
+    environment:
+      SA_PASSWORD: "SqlPassword!"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - drupal_network
+
+  adminer:
+    image: adminer:latest
+    container_name: drupal_adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - drupal_network
+    depends_on:
+      - sqlserver
+    environment:
+      ADMINER_DEFAULT_SERVER: sqlserver
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: drupal_api
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=drupal_db;User Id=sa;Password=SqlPassword!;TrustServerCertificate=True
+    networks:
+      - drupal_network
+    depends_on:
+      - sqlserver
+    restart: on-failure
+
+volumes:
+  sqlserver_data:
+    driver: local
+
+networks:
+  drupal_network:
+    driver: bridge
