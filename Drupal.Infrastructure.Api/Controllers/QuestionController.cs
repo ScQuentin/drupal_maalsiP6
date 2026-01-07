@@ -16,7 +16,7 @@ public class QuestionController(IQuestionService questionService) : ControllerBa
         return Ok(questions);
     }
 
-    [HttpPost("vote")]
+    [HttpPost("Vote")]
     public async Task<IActionResult> AnswerQuestion(AnswerDto answerDto)
     {
         var answer = questionService.AnswerQuestion(
@@ -25,5 +25,12 @@ public class QuestionController(IQuestionService questionService) : ControllerBa
             answerDto.Answer
         );
         return Ok(answer);
+    }
+
+    [HttpPost("Create")]
+    public async Task<IActionResult> CreateQuestion(string wording)
+    {
+        var question = questionService.CreateQuestion(wording);  
+        return Ok(question);
     }
 }

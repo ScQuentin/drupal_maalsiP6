@@ -4,6 +4,7 @@ namespace Drupal.Domain.Interfaces;
 
 public interface IQuestionService
 {
-    public Task<IEnumerable<Question>> GetUnansweredQuestionsByUserId(Guid userId);
-    public Task<Answer> AnswerQuestion(Guid questionId, Guid userId, Answer answer);
+    Task<IEnumerable<Question>> GetUnansweredQuestionsByUserId(Guid userId);
+    Task AnswerQuestion(Guid questionId, Guid userId, Answer answer);
+    Task<Question> CreateQuestion(string wording);
 }

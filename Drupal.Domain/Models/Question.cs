@@ -1,3 +1,3 @@
 ﻿namespace Drupal.Domain.Models;
 
-public record Question();
+public record Question(Guid Id, string Wording);
