@@ -10,7 +10,7 @@ interface Question {
 export default function QuestionList() {
     const [questions, setQuestions] = useState<Question[]>([]);
     const [userId, setUserId] = useState<string | null>(null);
-
+    const ApiUrl = process.env.NEXT_PUBLIC_API_URL;
     useEffect(() => {
         const initData = async () => {
             const storedId = localStorage.getItem('userId');
@@ -19,7 +19,7 @@ export default function QuestionList() {
 
             if (!currentId) {
                 try {
-                    const response = await fetch('http://localhost:5000/api/User/Create', {
+                    const response = await fetch(`${ApiUrl}api/User/Create`, {
                         method: 'GET',
                         headers: { 'Content-Type': 'application/json' }
                     });
@@ -38,7 +38,7 @@ export default function QuestionList() {
 
             if (currentId) {
                 try {
-                    const qResponse = await fetch(`http://localhost:5000/api/Question/unanswered/${currentId}`);
+                    const qResponse = await fetch(`${ApiUrl}/api/Question/unanswered/${currentId}`);
                     if (qResponse.ok) {
                         const qData = await qResponse.json();
                         setQuestions(qData);
@@ -62,7 +62,7 @@ export default function QuestionList() {
 
 
         try {
-            const response = await fetch('http://localhost:5000/api/Question/Vote', {
+            const response = await fetch(`${ApiUrl}/api/Question/Vote`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                body: JSON.stringify({
