@@ -11,5 +11,6 @@ public interface IQuestionRepository
     Task<Question> Update(Question question);
     Task AnswerQuestion(Guid userId, Guid questionId, Answer answer);
     Task Delete(Guid questionId);
+    Task<IEnumerable<Stats>> GetStats();
 
 }

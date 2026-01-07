@@ -52,7 +52,22 @@ public class QuestionRepository(DrupalDbContext context) : IQuestionRepository
         return questions.Select(q => new Question(q.Id, q.Wording));
     }
 
-    
+    public async Task<IEnumerable<Stats>> GetStats()
+    {
+        var questionsWithAnswers = await context.Questions
+            .Include(q => q.Answers)
+            .ToListAsync();
+
+        var stats = questionsWithAnswers.Select(q => new Stats(
+            new Question(q.Id, q.Wording),
+            q.Answers.Count(a => a.Answer == Answer.Yes),
+            q.Answers.Count(a => a.Answer == Answer.No)
+        ));
+
+        return stats;
+    }
+
+
     public async Task<IEnumerable<Question>> GetUnansweredByUserId(Guid userId)
     {
         var answeredQuestionIds = await context.Answers

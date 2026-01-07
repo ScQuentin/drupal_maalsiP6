@@ -7,4 +7,5 @@ public interface IQuestionService
     Task<IEnumerable<Question>> GetUnansweredQuestionsByUserId(Guid userId);
     Task AnswerQuestion(Guid questionId, Guid userId, Answer answer);
     Task<Question> CreateQuestion(string wording);
+    Task<IEnumerable<Stats>> GetStats();
 }

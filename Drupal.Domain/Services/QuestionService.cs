@@ -14,4 +14,7 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
     public async Task<Question> CreateQuestion(string wording)
         => await questionRepository.Create(wording);
 
+    public async Task<IEnumerable<Stats>> GetStats()
+        => await questionRepository.GetStats();
+
 }

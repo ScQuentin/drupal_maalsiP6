@@ -16,6 +16,13 @@ public class QuestionController(IQuestionService questionService) : ControllerBa
         return Ok(questions);
     }
 
+    [HttpGet("Results")]
+    public async Task<IActionResult> GetResults()
+    {
+        var results = await questionService.GetStats();
+        return Ok(results);
+    }
+
     [HttpPost("Vote")]
     public async Task<IActionResult> AnswerQuestion(AnswerDto answerDto)
     {
