@@ -86,7 +86,7 @@ export default function QuestionList() {
         }
     };
 
-    if (!userId) return <div>Chargement de l'utilisateur...</div>;
+    if (!userId) return <div>Chargement de l utilisateur</div>;
 
     return (
         <div className="container">
