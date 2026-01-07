@@ -15,7 +15,7 @@ export default function QuestionResults() {
     useEffect(() => {
         const fetchResults = async () => {
             try {
-                const response = await fetch('/api/Question/results');
+                const response = await fetch('http://localhost:5000/api/Question/results');
                 if (response.ok) {
                     const data = await response.json();
                     setResults(data);
@@ -50,7 +50,6 @@ export default function QuestionResults() {
 
                     return (
                         <div key={r.id} className="result-card">
-                            {/* Affichage via la propriété wording */}
                             <h2>{r.wording}</h2>
                             <div className="stats">
                                 <div className="stat-row">

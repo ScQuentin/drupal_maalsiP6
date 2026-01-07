@@ -3,12 +3,9 @@ import React, { useEffect, useState } from 'react';
 import '../css/css.css';
 
 interface Question {
-    Id: string;
-    Wording: string;   }
+    id: string;
+    wording: string;   }
 
-interface User {
-    Id: string;
-}
 
 export default function QuestionList() {
     const [questions, setQuestions] = useState<Question[]>([]);
@@ -22,13 +19,13 @@ export default function QuestionList() {
 
             if (!currentId) {
                 try {
-                    const response = await fetch('/api/Question/user', {
-                        method: 'POST',
+                    const response = await fetch('http://localhost:5000/api/User/Create', {
+                        method: 'GET',
                         headers: { 'Content-Type': 'application/json' }
                     });
                     if (response.ok) {
-                        const data: User = await response.json();
-                        currentId = data.Id;
+                        const data = await response.json();
+                        currentId = data;
                         if(currentId) localStorage.setItem('userId', currentId);
                     } else { throw new Error('API Error'); }
                 } catch (error) {
@@ -41,7 +38,7 @@ export default function QuestionList() {
 
             if (currentId) {
                 try {
-                    const qResponse = await fetch(`/api/Question/unanswered/${currentId}`);
+                    const qResponse = await fetch(`http://localhost:5000/api/Question/unanswered/${currentId}`);
                     if (qResponse.ok) {
                         const qData = await qResponse.json();
                         setQuestions(qData);
@@ -49,9 +46,9 @@ export default function QuestionList() {
                 } catch (error) {
                     console.warn("Mode hors ligne: Questions Mock chargées");
                    setQuestions([
-                        { Id: "guid-quest-1", Wording: "Le TDD est-il indispensable ?" },
-                        { Id: "guid-quest-2", Wording: "Préférez-vous le télétravail ?" },
-                        { Id: "guid-quest-3", Wording: "L'ananas sur la pizza : Oui ou Non ?" }
+                        { id: "guid-quest-1", wording: "Le TDD est-il indispensable ?" },
+                        { id: "guid-quest-2", wording: "Préférez-vous le télétravail ?" },
+                        { id: "guid-quest-3", wording: "L'ananas sur la pizza : Oui ou Non ?" }
                     ]);
                 }
             }
@@ -63,26 +60,25 @@ export default function QuestionList() {
     const handleVote = async (questionId: string, answerCode: number) => {
         if (!userId) return;
 
-      const answerText = answerCode === 1 ? "Oui" : "Non";
 
         try {
-            const response = await fetch('/api/Question/Vote', {
+            const response = await fetch('http://localhost:5000/api/Question/Vote', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                body: JSON.stringify({
                     UserId: userId,
                     QuestionId: questionId,
-                    Answer: answerText
+                    Answer: answerCode
                 })
             });
 
             if (!response.ok) throw new Error('API Error');
 
-            setQuestions((prev) => prev.filter((q) => q.Id !== questionId));
+            setQuestions((prev) => prev.filter((q) => q.id !== questionId));
 
         } catch (error) {
             console.warn("Mode hors ligne: Vote simulé");
-            setQuestions((prev) => prev.filter((q) => q.Id !== questionId));
+            setQuestions((prev) => prev.filter((q) => q.id !== questionId));
         }
     };
 
@@ -96,12 +92,11 @@ export default function QuestionList() {
             ) : (
                 <ul className="question-list">
                     {questions.map((q) => (
-                        <li key={q.Id} className="question-item">
-                            <span className="question-text">{q.Wording}</span>
+                        <li key={q.id} className="question-item">
+                            <span className="question-text">{q.wording}</span>
                             <div className="vote-buttons">
-                                {/* On garde 1 et 2 ici pour la logique UI, converti dans handleVote */}
-                                <button className="btn-oui" onClick={() => handleVote(q.Id, 1)}>🟢 Oui</button>
-                                <button className="btn-non" onClick={() => handleVote(q.Id, 2)}>🔴 Non</button>
+                                <button className="btn-oui" onClick={() => handleVote(q.id, 0)}>🟢 Oui</button>
+                                <button className="btn-non" onClick={() => handleVote(q.id, 1)}>🔴 Non</button>
                             </div>
                         </li>
                     ))}

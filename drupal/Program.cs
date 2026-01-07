@@ -21,8 +21,18 @@ builder.Services.AddDbContext<DrupalDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReact",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000", "http://localhost:3001")
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+});
 var app = builder.Build();
+app.UseCors("AllowReact");
 
 using (var scope = app.Services.CreateScope())
 {
